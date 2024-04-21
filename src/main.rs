@@ -3,6 +3,14 @@ use reqwest;
 use time::Date;
 use time::macros::format_description;
 use indicatif::ProgressBar;
+use clap::Parser;
+
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    #[arg(short, long)]
+    file: String,
+}
 
 #[derive(Debug, serde::Deserialize)]
 struct Rate {
@@ -33,14 +41,14 @@ struct Row<'a> {
 
 static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a/eur/";
 
-async fn example() -> Result<(), Box<dyn Error>> {
+async fn example(file: &str) -> Result<(), Box<dyn Error>> {
     let mut buy_net: f64 = 0.0;
     let mut buy_net_pln: f64 = 0.0;
     let mut sell_net: f64 = 0.0;
     let mut sell_net_pln: f64 = 0.0;
     // Build the CSV reader and iterate over each record.
     let mut rdr = csv::ReaderBuilder::new()
-        .delimiter(b';').from_path("transactions_clean.csv")?;
+        .delimiter(b';').from_path(&file)?;
     let count = rdr.records().count() as u64;
     rdr = csv::ReaderBuilder::new()
         .delimiter(b';').from_path("transactions_clean.csv")?;
@@ -95,7 +103,8 @@ async fn example() -> Result<(), Box<dyn Error>> {
 
 #[tokio::main]
 async fn main() {
-    if let Err(err) = example().await {
+    let args = Args::parse();
+    if let Err(err) = example(&args.file).await {
         println!("error running example: {}", err);
         process::exit(1);
     }
