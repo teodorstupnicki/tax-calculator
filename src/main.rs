@@ -1,4 +1,4 @@
-use std::{error::Error, io, process};
+use std::{error::Error, process};
 use reqwest;
 use time::Date;
 use time::macros::format_description;
