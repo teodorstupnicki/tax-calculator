@@ -12,11 +12,11 @@ struct Args {
     file: String,
 }
 
-#[allow(non_snake_case)]
 #[derive(Debug, serde::Deserialize)]
+#[serde(rename_all(deserialize = "camelCase"))]
 struct Rate {
     no: String,
-    effectiveDate: String,
+    effective_date: String,
     mid: f64
 }
 
