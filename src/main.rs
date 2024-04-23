@@ -12,6 +12,7 @@ struct Args {
     file: String,
 }
 
+#[allow(non_snake_case)]
 #[derive(Debug, serde::Deserialize)]
 struct Rate {
     no: String,
