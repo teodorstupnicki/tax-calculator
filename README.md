@@ -4,6 +4,6 @@ Calculator for tax liability from income in foreign currencies. The default impl
 # CSV file format
 | Column name | Value |
 |-------------|-------|
-|             |       |
+| Date            |       |
 |             |       |
 |             |       |
