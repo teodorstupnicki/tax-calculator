@@ -10,6 +10,8 @@ use clap::Parser;
 struct Args {
     #[arg(short, long)]
     file: String,
+    #[arg(short, long)]
+    currency: String,
 }
 
 #[derive(Debug, serde::Deserialize)]
