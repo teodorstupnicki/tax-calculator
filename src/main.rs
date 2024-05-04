@@ -8,9 +8,11 @@ use clap::Parser;
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
+    /// Transactions file path
     #[arg(short, long)]
     file: String,
-    #[arg(short, long)]
+    /// Case-insensitive three- letter currency code (ISO 4217 standard)
+    #[clap(short, long)]
     currency: String,
 }
 
