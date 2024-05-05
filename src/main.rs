@@ -11,7 +11,8 @@ struct Args {
     /// Transactions file path
     #[arg(short, long)]
     file: String,
-    /// Case-insensitive three- letter currency code (ISO 4217 standard)
+    
+    /// Case-insensitive three-letter currency code (ISO 4217 standard)
     #[clap(short, long)]
     currency: String,
 }
@@ -46,7 +47,7 @@ struct Row<'a> {
 
 static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a/eur/";
 
-async fn example(file: &str) -> Result<(), Box<dyn Error>> {
+async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
     let mut buy_net: f64 = 0.0;
     let mut buy_net_pln: f64 = 0.0;
     let mut sell_net: f64 = 0.0;
@@ -67,7 +68,8 @@ async fn example(file: &str) -> Result<(), Box<dyn Error>> {
         let mut date = Date::parse(row.date, &format)?;
         date = date.previous_day().unwrap();
         
-        let mut request_url = format!("{API_URL}{0}", date);
+        let currency_lowercase = currency.to_lowercase();
+        let mut request_url = format!("{API_URL}/{1}/{0}", date, currency_lowercase.as_str());
         // println!("{}", request_url);
 
         let mut response = reqwest::get(&request_url).await?;
@@ -109,7 +111,7 @@ async fn example(file: &str) -> Result<(), Box<dyn Error>> {
 #[tokio::main]
 async fn main() {
     let args = Args::parse();
-    if let Err(err) = example(&args.file).await {
+    if let Err(err) = example(&args.currency, &args.file).await {
         println!("error running example: {}", err);
         process::exit(1);
     }
