@@ -4,7 +4,7 @@ Calculator for tax liability from income in foreign currencies. The default impl
 # CSV file format
 ## Binance
 | Column name | Value |
-|-------------|-------|
+|-------------|:-------:|
 | Date            |   string, format: yyyy/mm/dd    |
 |    Type         |   string, "Buy" or "Sell"    |
 |    Sent amount         |    float   |
