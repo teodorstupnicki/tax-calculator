@@ -15,4 +15,4 @@ Calculator for tax liability from income in foreign currencies. The default impl
 |    Fee Currency         |    string   |
 
 
-## Kraken (coming soon)
+## Kraken
