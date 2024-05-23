@@ -16,3 +16,5 @@ Calculator for tax liability from income in foreign currencies. The default impl
 
 
 ## Kraken
+| Column name | Value |
+|-------------|:-------:|
