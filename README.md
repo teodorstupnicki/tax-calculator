@@ -1,4 +1,4 @@
-# tax-calculator
+# NBP tax liability calculator
 Calculator for tax liability from income in foreign currencies. The default implementation uses National Bank of Poland (Narodowy Bank Polski) API for currency exchange rates: https://api.nbp.pl/en.html
 
 # CSV file format
@@ -13,3 +13,8 @@ Calculator for tax liability from income in foreign currencies. The default impl
 |    Received Currency         |   string    |
 |    Fee Amount       |   float    |
 |    Fee Currency         |    string   |
+
+
+## Kraken
+| Column name | Value |
+|-------------|:-------:|
