@@ -12,9 +12,9 @@ struct Args {
     #[arg(short, long)]
     file: String,
     
-    /// Case-insensitive three-letter currency code (ISO 4217 standard)
+    /// Exchange that the transactions file is from, options: "binance", "kraken"
     #[clap(short, long)]
-    currency: String,
+    exchange: String,
 }
 
 #[derive(Debug, serde::Deserialize)]
@@ -45,7 +45,7 @@ struct Row<'a> {
     fee_currency: &'a str,
 }
 
-static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a/eur/";
+static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a";
 
 async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
     let mut buy_net: f64 = 0.0;
@@ -68,7 +68,7 @@ async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
         let mut date = Date::parse(row.date, &format)?;
         date = date.previous_day().unwrap();
         
-        let currency_lowercase = currency.to_lowercase();
+        let currency_lowercase = row.received_currency.to_lowercase();
         let mut request_url = format!("{API_URL}/{1}/{0}", date, currency_lowercase.as_str());
         // println!("{}", request_url);
 
@@ -76,7 +76,7 @@ async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
         while response.status().is_client_error() {
             // println!("Not a working day.");
             date = date.previous_day().unwrap(); 
-            request_url = format!("{API_URL}{0}", date);
+            request_url = format!("{API_URL}/{1}/{0}", date, currency_lowercase);
             // println!("{}", request_url);
             response = reqwest::get(&request_url).await?;
         }
