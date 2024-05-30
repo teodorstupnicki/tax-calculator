@@ -45,7 +45,6 @@ struct Row<'a> {
     fee_currency: &'a str,
 }
 
-#[derive(EnumString)]
 enum Exchange {
     Binance,
     Kraken,
