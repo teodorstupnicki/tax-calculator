@@ -45,6 +45,12 @@ struct Row<'a> {
     fee_currency: &'a str,
 }
 
+#[derive(EnumString)]
+enum Exchange {
+    Binance,
+    Kraken,
+}
+
 static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a";
 
 async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
