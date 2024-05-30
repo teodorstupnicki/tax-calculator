@@ -53,7 +53,7 @@ enum Exchange {
 
 static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a";
 
-async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
+async fn process_binance(file: &str) -> Result<(), Box<dyn Error>> {
     let mut buy_net: f64 = 0.0;
     let mut buy_net_pln: f64 = 0.0;
     let mut sell_net: f64 = 0.0;
@@ -117,8 +117,10 @@ async fn example(currency: &str, file: &str) -> Result<(), Box<dyn Error>> {
 #[tokio::main]
 async fn main() {
     let args = Args::parse();
-    if let Err(err) = example(&args.currency, &args.file).await {
-        println!("error running example: {}", err);
-        process::exit(1);
+    if &args.exchange == "binance" {
+        if let Err(err) = process_binance(&args.file).await {
+            println!("error running example: {}", err);
+            process::exit(1);
+        }
     }
 }
