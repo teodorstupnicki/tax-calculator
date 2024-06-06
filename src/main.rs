@@ -118,7 +118,7 @@ async fn main() {
     let args = Args::parse();
     if &args.exchange == "binance" {
         if let Err(err) = process_binance(&args.file).await {
-            println!("error running example: {}", err);
+            println!("Error while processing Binance transactions file: {}", err);
             process::exit(1);
         }
     }
