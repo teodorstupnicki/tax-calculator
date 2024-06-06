@@ -12,7 +12,7 @@ struct Args {
     #[arg(short, long)]
     file: String,
     
-    /// Exchange that the transactions file is from, options: "binance", "kraken"
+    /// Exchange that the transactions file is from, options: "binance"
     #[clap(short, long)]
     exchange: String,
 }
