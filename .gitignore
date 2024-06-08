@@ -15,5 +15,7 @@ Cargo.lock
 
 
 # Added by cargo
-
 /target
+
+# Any transaction files used for testing
+*.csv
