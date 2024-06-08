@@ -72,8 +72,13 @@ async fn process_binance(file: &str) -> Result<(), Box<dyn Error>> {
         let format = format_description!("[year]-[month]-[day]");
         let mut date = Date::parse(row.date, &format)?;
         date = date.previous_day().unwrap();
-        
-        let currency_lowercase = row.received_currency.to_lowercase();
+        let mut currency_lowercase: String = String::new(); 
+        if row.operation == "Buy" {
+            currency_lowercase = row.sent_currency.to_lowercase();
+        }
+        else if row.operation == "Sell" {
+            currency_lowercase = row.received_currency.to_lowercase();
+        }
         let mut request_url = format!("{API_URL}/{1}/{0}", date, currency_lowercase.as_str());
         // println!("{}", request_url);
 
