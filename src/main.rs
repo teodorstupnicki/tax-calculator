@@ -50,6 +50,11 @@ enum Exchange {
     Kraken,
 }
 
+enum Operation {
+    Buy,
+    Sell,
+}
+
 static API_URL: &str = "http://api.nbp.pl/api/exchangerates/rates/a";
 
 async fn process_binance(file: &str) -> Result<(), Box<dyn Error>> {
