@@ -1,0 +1,4 @@
+Date;Type;Sent Amount;Sent Currency;Received Amount;Received Currency;Fee Amount;Fee Currency
+2023-01-10;Buy;2.0;EUR;2.14226979;USDT;0.0;
+2023-01-11;Buy;999.0;EUR;1073.41159472;USDT;0.0;
+2023-01-12;Sell;16.39404246;USDT;15.11000007;EUR;0.0;
