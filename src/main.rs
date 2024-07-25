@@ -26,6 +26,6 @@ mod tests {
 
     #[test]
     fn test_add() {
-        assert_eq!(add(1, 2), 3);
+        assert_eq!(1.add(2), 3);
     }
 }
